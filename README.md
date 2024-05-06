@@ -8,7 +8,7 @@
 the neural and behavioral data in Python accessible .npy files. This is a pre-requisite for any additional analysis and takes ~30-40 minutes to run 
 for all sessions across both the Split Maze (SM) and Random Foraging (RF) tasks. 
 4. Run the notebook "Shuffle Procedure" at least through the classification of putative inhibitory interneurons. After that, you have the option of 
-using th output of the rest of the notebook (Dryad repo > shuffle_scores). If you would like to regenerate shuffle scores, note that the shuffle 
+using the output of the rest of the notebook (Dryad repo > shuffle_scores). If you would like to regenerate shuffle scores, note that the shuffle 
 procedure required to identify functional cell types (e.g. spatial, grid, non-grid spatial, speed cells) is computationally intensive and/or time-
 consuming. This is a necessary step before proceeding with neural analyses starting in Figure 2. You may find it helpful to run the shuffle using a cluster. 
 5. To recapitulate results in individual figures, run code in the corresponding Python notebooks, adjusting paths as needed.     
