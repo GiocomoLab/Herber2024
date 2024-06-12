@@ -384,12 +384,12 @@ def autocorr(x,lags):
 def find(x):
     return x.nonzero()[0]
 
-
 def pf(x, alpha, beta):
     # defines psychometric function based on a sigmoid curve with scale beta and center alpha
     return 1. / (1 + np.exp( -(x-alpha)/beta ))
 
 def count_consec(lst):
+    # for a list, returns an array counting the number of consecutive times each value has appeared
     consec = [1]
     for x, y in zip(lst, lst[1:]):
         if x == y - 1:
@@ -398,6 +398,52 @@ def count_consec(lst):
             consec.append(1)
     return consec
 
+def find_skipped(trial, max_trial_num): 
+    
+    if (len(np.unique(trial)) < max_trial_num): 
+        alltrial = np.arange(0, np.max(np.unique(trial)) + 1 , 1)
+    else:    
+        alltrial = np.arange(0,max_trial_num,1)
+    
+    skippedtrials = np.setdiff1d(alltrial, np.unique(trial)).astype(int)
+    
+    return skippedtrials
+
+def contextsortedtrials(alltrial, context, alt_idx = 140):
+
+    #sorts alternation trials based on context info
+    contextsort = context.copy()
+    contexttail = context[alt_idx:]
+    contexttail = 1 - contexttail
+    sortidx = np.argsort(contexttail, kind = 'stable')
+    
+    contextsort[alt_idx:] = contexttail[sortidx] 
+    allsorttrial = alltrial.copy()
+    alltail = alltrial[alt_idx:]
+    allsorttrial[alt_idx:] = alltail[sortidx]
+    
+    return contextsort, allsorttrial
+
+def sortedtrialbyframe(rawtrialfil, trial, newskippedtrials):
+
+    count = 0
+    if len(newskippedtrials) > 0 :
+        skippedrawtrialfil = rawtrialfil.copy()
+        consec = count_consec(list(np.sort(newskippedtrials).astype(int)))
+
+        for i, k in enumerate(consec):
+            t = np.sort(newskippedtrials)[count] 
+
+            if i == 0: 
+                skippedrawtrialfil[rawtrialfil >= t] = skippedrawtrialfil[rawtrialfil >= t] + k
+            else: 
+                skippedrawtrialfil[skippedrawtrialfil >= t] = skippedrawtrialfil[skippedrawtrialfil >= t] + k
+            count += k
+    else:
+        skippedrawtrialfil = trial.copy()
+        
+    return skippedrawtrialfil
+    
 """ Scripts for Loading Matlab Structs """
 
 def loadmat_sbx(filename):
