@@ -333,6 +333,70 @@ def trial_idx(posx):
 
     return trial
 
+def find8adjacentElements(test_list):
+    ''' 
+    Params
+    ------
+    test_list : ndarray
+        1d array to be sorted
+    
+    Returns
+    -------
+    neighbors : list
+        nested list where each element is a list of 8 adjacent elements to the element with the same 
+        index in test_list, adjusting for the first and last four elements and not including 
+    '''
+    
+    neighbors = []
+    for idx, ele in enumerate(test_list):
+    # Checking for all cases to append
+        if idx == 0:
+            neighbors.append(test_list[(idx+1):(idx + 9)])
+        elif idx == 1:
+            neighbors.append(np.concatenate((test_list[(idx - 1)],test_list[(idx+1):(idx + 8)]),axis=None))
+        elif idx == 2:
+            neighbors.append(np.concatenate((test_list[:idx],test_list[(idx+1):(idx + 7)]),axis=None))
+        elif idx == 3:
+            neighbors.append(np.concatenate((test_list[:idx],test_list[(idx+1):(idx + 6)]),axis=None))
+        elif idx == len(test_list) - 1:
+            neighbors.append(np.concatenate((test_list[(idx-8):idx]),axis=None))                     
+        elif idx == len(test_list) - 2:
+            neighbors.append(np.concatenate((test_list[(idx-7):idx],test_list[(idx + 1):]),axis=None))
+        elif idx == len(test_list) - 3:
+            neighbors.append(np.concatenate((test_list[(idx-6):idx],test_list[(idx + 1):]),axis=None))
+        elif idx == len(test_list) - 4:
+            neighbors.append(np.concatenate((test_list[(idx-5):idx],test_list[(idx + 1):]),axis = None))
+        else:
+            neighbors.append(np.concatenate((test_list[(idx - 4):idx],test_list[(idx+1):(idx + 5)]),axis=None))
+    return neighbors 
+
+    return (phi ** np.arange(nt)) * sigma2 / (1 - phi ** 2)
+
+def autocorr(x,lags):
+    '''numpy.correlate'''
+    mean=x.mean()
+    var=np.var(x)
+    xp=x-mean
+    corr=np.correlate(xp,xp,'full')[len(x)-1:]/var/len(x)
+
+    return corr[:len(lags)]
+
+def find(x):
+    return x.nonzero()[0]
+
+
+def pf(x, alpha, beta):
+    # defines psychometric function based on a sigmoid curve with scale beta and center alpha
+    return 1. / (1 + np.exp( -(x-alpha)/beta ))
+
+def count_consec(lst):
+    consec = [1]
+    for x, y in zip(lst, lst[1:]):
+        if x == y - 1:
+            consec[-1] += 1
+        else:
+            consec.append(1)
+    return consec
 
 """ Scripts for Loading Matlab Structs """
 
