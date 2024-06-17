@@ -400,6 +400,20 @@ def count_consec(lst):
 
 def find_skipped(trial, max_trial_num): 
     
+    '''
+    Parameters
+    ----------
+    trial : ndarray
+        trial number of each observation; shape (n_obs,)
+    max_trial_num : int
+        total number of trials in session
+
+    Returns
+    -------
+    skippedtrials : ndarray
+        number of spikes per observation; shape (n_obs,)
+    '''
+    
     if (len(np.unique(trial)) < max_trial_num): 
         alltrial = np.arange(0, np.max(np.unique(trial)) + 1 , 1)
     else:    
