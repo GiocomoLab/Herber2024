@@ -2,6 +2,7 @@
  Code to replicate analyses in Herber et al. 2024
 
 Instructions:
+
 0. Download data from the Dryad repository (https://doi.org/10.5061/dryad.8cz8w9h0d) locally and unzip subfolders. Clone this repository.
 1. Install & update conda. Ensure that Python version 3.8.16 is accessible to conda.
 2. Create an environment matching the content of the aging MEC environment (conda create --name agingmec --file agingmec_env.txt python = 3.8.16)
