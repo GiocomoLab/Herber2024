@@ -13,8 +13,7 @@ for all sessions across both the Split Maze (SM) and Random Foraging (RF) tasks.
 using the output of the rest of the notebook (Dryad repo > shuffle_scores) or generating it yourself. If you would like to regenerate shuffle scores, note that the 
 shuffle procedure required to identify functional cell types (e.g. spatial, grid, non-grid spatial, speed cells) is computationally intensive and/or time-
 consuming. This is a necessary step before proceeding with neural analyses starting in Figure 2. You may find it helpful to run the shuffle using a cluster. 
-5. To recapitulate results in individual figures except Figure 4, run code in the corresponding Python notebooks using the agingmec env, adjusting paths as needed. It is recommended
-to run the figures in the following order: Figure 1/S1, Figure 2/S3, Figure S2, Figure 3/S4, Figure 5, Figure S5, Figure 6, and then Figure S6. In particular, Figure 3/S4 and Figure S5 results depend on Figure 2/S3 outputs and Figure S5 results depend on Figure 3/S4 and Figure 5 outputs.
+5. To recapitulate results in individual figures except Figure 4, run code in the corresponding Python notebooks using the agingmec env, adjusting paths as needed. It is recommended to run the figures in the following order: Figure 1/S1, Figure S2, Figure 2/S3, Figure 3/S4, Figure 5, Figure S5, Figure 6, and then Figure S6. In particular, Figure 2/S3 uses Figure S2 outputs; Figure 3/S4 and Figure S5 results depend on Figure 2/S3 outputs; and Figure S5 results depend on Figure 3/S4 and Figure 5 outputs.
 6. To recapitulate results in Figure 4, create an environment matching the context of the LFP world environment (conda create --name LFPworld --file LFPworld_env.txt python = 3.8.16). 
 Then, run the corresponding Jupyter notebook for Figure 4 within that environment.
 
