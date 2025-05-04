@@ -74,12 +74,15 @@ class LFP:
         self.name = name
 
         # if instance already defined
+
+        # original loading code 
         #if exists(self.name):
             #if ('synced' in self.name):
                 #self.load(synced = True)
             #else: 
                 #self.load(synced = False)
-    
+        
+        #loading code for published Dryad repo
         if exists(self.name):
             self.loadsyncedfile()
             
@@ -171,13 +174,13 @@ class LFP:
         self.lfp = self.lfp[:, 1:]  # remove Timestamps column
 
     def loadsyncedfile(self):
-        '''Load file'''    
+        '''Load synced file with rate '''    
         file = self.name
         lfp_df = pd.read_csv(file)
         self.timestamps = np.array(lfp_df['Timestamps'])
         self.lfp = np.array(lfp_df)
         self.lfp = self.lfp[:, 1:]  # remove Timestamps column
-        self.rate = 625 #supply sampling rate metadata
+        self.rate = 625 #supply 4x down-sampled sampling rate as hard-coded value
 
     def save(self):
         '''Save to file'''
